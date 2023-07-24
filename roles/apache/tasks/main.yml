@@ -1,0 +1,32 @@
+---
+# tasks file for apache
+- name: install apache version
+  ansible.builtin.dnf:
+    name: 
+      - httpd
+      - firewalld
+    state: latest
+
+- name: start service httpd
+  ansible.builtin.service:
+    name: httpd
+    state: started
+    enabled: yes
+
+- name: Start service firewalld
+  ansible.builtin.service:
+    name: firewalld
+    state: restarted
+    enabled: yes
+
+- name: Add http service in firewall rule
+  ansible.builtin.firewalld:
+    service: http
+    state: enabled
+    permanent: yes
+    immediate: yes
+
+- name: Copy the templete.j2 file to web server direct
+  ansible.builtin.template:
+    src: template.j2
+    dest: /var/www/html/index.html

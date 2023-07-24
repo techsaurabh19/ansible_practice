@@ -1,0 +1,23 @@
+- name: content in dev
+  hosts: dev
+  tasks:
+    - name: Copy using inline content
+      ansible.builtin.copy:
+        content: Development
+        dest: /etc/issue
+
+- name: content in test
+  hosts: test
+  tasks:
+    - name: Copy using inline content
+      ansible.builtin.copy:
+        content: Test
+        dest: /etc/issue
+
+- name: content in prod
+  hosts: prod
+  tasks:
+    - name: Copy using inline content
+      ansible.builtin.copy:
+        content: Production
+        dest: /etc/issue

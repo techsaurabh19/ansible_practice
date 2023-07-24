@@ -1,0 +1,6 @@
+---
+- src: /home/ec2-user/ansible/roles/phpinfo.tgz
+  name: phpinfo
+
+- src: /home/ec2-user/ansible/roles/balancer.tgz
+  name: balancer

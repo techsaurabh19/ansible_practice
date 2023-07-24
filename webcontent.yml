@@ -1,0 +1,33 @@
+- name: create web content dir
+  hosts: dev
+  tasks:
+    - name : create group
+      ansible.builtin.group:
+        name: devops
+        state: present
+    - name: create a dir
+      ansible.builtin.file:
+        path: /devweb
+        state: directory
+        mode: '2755'
+        setype: httpd_sys_content_t
+
+    - name: Create a symbolic link
+      ansible.builtin.file:
+        src: /devweb
+        dest: /var/www/html/devweb
+        state: link
+        setype: httpd_sys_content_t
+
+    - name: copy using inline content
+      ansible.builtin.copy:
+        content: "Development"
+        dest: /devweb/index.html
+        setype: httpd_sys_content_t
+
+    - name: Permit traffic in default zone for https service
+      ansible.posix.firewalld:
+        service: http
+        permanent: true
+        state: enabled
+        immediate: true

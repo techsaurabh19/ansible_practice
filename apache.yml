@@ -1,0 +1,4 @@
+ - name: install apache playbook
+   hosts: werbserver
+   roles :
+        - apache

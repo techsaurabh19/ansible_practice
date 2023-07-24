@@ -1,0 +1,9 @@
+---
+- name: use timesync
+  hosts: all
+  vars: 
+    timesync_ntp_server:
+      - hostname: marla.ludost.net
+        iburst: yes
+  roles:
+      - rhel-system-roles.timesync  
